@@ -29,7 +29,7 @@ class PieChartPage extends StatelessWidget {
                         sections: getSections(expenseData.expenses
                             .where((expense) => !expense.isIncome)
                             .toList()),
-                        centerSpaceRadius: 40,
+                        centerSpaceRadius: 80,
                         sectionsSpace: 2,
                       ),
                     );
