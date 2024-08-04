@@ -18,14 +18,14 @@ List<PieChartSectionData> getSections(List<ExpenseModel> expenses) {
 
   final List<PieChartSectionData> sections = [];
   final List<Color> colors = [
-    Colors.blue,
-    Colors.red,
-    Colors.green,
-    Colors.orange,
-    Colors.purple,
-    Colors.yellow,
-    Colors.cyan,
-    Colors.teal,
+    Color(0xFFccdbdc),
+    Color(0xFF9ad1d4),
+    Color(0xFF3f88c5),
+    Color(0xFF007ea7),
+    Color(0xFF003249),
+    Color(0xFF0a2472),
+    Color(0xFF3fc1c0),
+    Color(0xFF0f80aa),
   ];
 
   categoryAmountMap.forEach((category, amount) {
