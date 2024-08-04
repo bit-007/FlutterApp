@@ -3,8 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../expense_model.dart';
 import '../pages/pie_chart_page.dart';
-import '../widget/ fund_condition_widget.dart';
 
+import '../widget/ fund_condition_widget.dart';
 import '../widget/item.dart';
 
 class HomePage extends StatefulWidget {
@@ -175,69 +175,51 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton.extended(
-            backgroundColor: Colors.green,
-            onPressed: () => _showAddDialog(true),
-            label: const Text('Add Income'),
-            icon: const Icon(Icons.add),
-            heroTag: "addIncome",
-          ),
-          const SizedBox(height: 10),
-          FloatingActionButton.extended(
-            backgroundColor: Colors.red,
-            onPressed: () => _showAddDialog(false),
-            label: const Text('Add Expense'),
-            icon: const Icon(Icons.remove),
-            heroTag: "addExpense",
-          ),
-        ],
-      ),
       appBar: AppBar(
         title: const Text("Expense Tracker"),
         centerTitle: true,
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color(0xFFADE8F4),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: FundCondition(
-                    type: "BALANCE",
-                    amount: "$balance",
-                    icon: "blue",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: FundCondition(
+                      type: "BALANCE",
+                      amount: "$balance",
+                      icon: "blue",
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: FundCondition(
-                    type: "EXPENSE",
-                    amount: "$totalExpense",
-                    icon: "orange",
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: FundCondition(
+                      type: "EXPENSE",
+                      amount: "$totalExpense",
+                      icon: "orange",
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 8),
-                  child: FundCondition(
-                    type: "INCOME",
-                    amount: "$totalIncome",
-                    icon: "grey",
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 8),
+                    child: FundCondition(
+                      type: "INCOME",
+                      amount: "$totalIncome",
+                      icon: "grey",
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            Expanded(
-              child: ListView.builder(
+                ],
+              ),
+              const SizedBox(height: 14),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: Provider.of<ExpenseData>(context).expenses.length,
                 itemBuilder: (context, index) {
                   final expense =
@@ -299,19 +281,40 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        child: IconButton(
-          icon: const Icon(Icons.pie_chart),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PieChartPage()),
-            );
-          },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.pie_chart),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PieChartPage()),
+                );
+              },
+            ),
+            ElevatedButton.icon(
+              onPressed: () => _showAddDialog(true),
+              icon: const Icon(Icons.add),
+              label: const Text('Add Income'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFc1d3fe),
+              ),
+            ),
+            ElevatedButton.icon(
+              onPressed: () => _showAddDialog(false),
+              icon: const Icon(Icons.remove),
+              label: const Text('Add Expense'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFc1d3fe),
+              ),
+            ),
+          ],
         ),
       ),
     );
